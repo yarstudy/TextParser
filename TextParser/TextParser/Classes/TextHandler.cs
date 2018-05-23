@@ -48,14 +48,21 @@ namespace TextParser.Classes
             }
         }
 
-        //This method sortes sentences by the number of words.
-        public List<ISentenceHandler> SortByWordsCount()
+        //This method sortes sentences by the number of words (through classic methods).
+        //public List<ISentenceHandler> SortByWordsCount()
+        //{
+        //    return SentencesList.OrderBy(x => x.Count).ToList<ISentenceHandler>();
+        //}
+
+        //This method sortes sentences by the number of words (through LINQ).
+        public string SortByWordsCount()
         {
-            return SentencesList.OrderBy(x => x.Count).ToList();
-            //List<SentenceHandler> result = new List<SentenceHandler>();
-            //result = (from sentence in SentencesList orderby sentence.Count select sentence).ToList<SentenceHandler>();
-            //return result;
+            //return SentencesList.OrderBy(x => x.Count).ToList();
+            string result;
+            result = String.Join(" ", (from sentence in SentencesList orderby sentence.Count select sentence));
+            return result;
         }
+
 
         //This method returns non-repeated words of a given length from interrogative sentences
         public string GetInterrogativeSentence(int wordLenght)

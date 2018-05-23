@@ -8,6 +8,6 @@ namespace TextParser.Interfaces
 {
     public interface ITextHandler : ICountElements
     {
-        List<ISentenceHandler> SentencesList { get; }
+        List<ISentenceHandler> SentencesList { get;}
     }
 }

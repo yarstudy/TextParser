@@ -18,7 +18,8 @@ namespace TextParser
             Console.WriteLine(text.ToString());
             Console.WriteLine("\n==================================================\n");
             Console.WriteLine("Вывести все предложения заданного текста в порядке возрастания количества слов в каждом из них:\n");
-            Console.WriteLine(String.Join(" ", text.SortByWordsCount()));
+            //Console.WriteLine(String.Join(" ", text.SortByWordsCount()));
+            Console.WriteLine(text.SortByWordsCount()); //through LINQ
             Console.WriteLine("\n==================================================\n");
             Console.WriteLine("Во всех вопросительных предложениях текста найти и напечатать без повторений слова заданной длины (3 символа):\n");
             Console.WriteLine(String.Join(" ", text.GetInterrogativeSentence(3)));
