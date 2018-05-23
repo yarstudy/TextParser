@@ -14,7 +14,7 @@ namespace TextParser.Classes
         //Properties
         private string Sentence { get; set; }
         public char Separator { get; private set; }
-        public  List<IWordHandler> WordsList { get; private set; }
+        public List<IWordHandler> WordsList { get; private set; }
 
         //Constructors
         public SentenceHandler()
@@ -25,6 +25,17 @@ namespace TextParser.Classes
         {
             Sentence = sentence;
             Separator = separator;
+        }
+        public SentenceHandler(IEnumerable<IWordHandler> words, char separator)
+        {
+            WordsList = new List<IWordHandler>(words);
+            Separator = separator;
+        }
+
+        //This method determines whether this sentence is interrogative
+        public bool SentenceIsInterrogative
+        {
+            get { return Sentence.EndsWith("?"); }
         }
 
         //This method handles the raw sentence. This method is static, in order to apply it without creating an instance (In the method ParseText from TextHandler class)

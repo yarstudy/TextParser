@@ -42,6 +42,5 @@ namespace TextParser.Classes
         {
             return Word;
         }
-
     }
 }

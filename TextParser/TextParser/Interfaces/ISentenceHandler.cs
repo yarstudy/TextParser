@@ -8,7 +8,8 @@ namespace TextParser.Interfaces
 {
     public interface ISentenceHandler : ICountElements
     {
-        List<IWordHandler> WordsList{ get; }
+        List<IWordHandler> WordsList { get; }
+        bool SentenceIsInterrogative { get; }
         char Separator { get; }
     }
 }
