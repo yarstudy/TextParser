@@ -16,10 +16,6 @@ namespace TextParser.Classes
         //Properties
         public string Word { get; set; }
         public List<char> CharactersList { get; set; }
-        public bool FirstLetterIsConsonant
-        {
-            get { return consonantLetters.Contains(CharactersList.First()); }
-        }
 
         //Constructor
         public WordHandler(string word)
@@ -37,10 +33,16 @@ namespace TextParser.Classes
         public int Count
         { get { return CharactersList.Count; } }
 
-        //Override the method ToString for easy output
+        //Override the method ToString to easy output
         public override string ToString()
         {
             return Word;
+        }
+
+        //This method determines whether the first letter of a word is a consonant
+        public bool FirstLetterIsConsonant
+        {
+            get { return consonantLetters.Contains(CharactersList.First()); }
         }
     }
 }

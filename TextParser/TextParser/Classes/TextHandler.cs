@@ -62,7 +62,6 @@ namespace TextParser.Classes
             return result;
         }
 
-
         //This method returns non-repeated words of a given length from interrogative sentences
         public string GetInterrogativeSentence(int wordLenght)
         {
@@ -81,6 +80,7 @@ namespace TextParser.Classes
             }
             return String.Join(" ", result);
         }
+
         //This method removes words of a given length.s
         public TextHandler RemoveWordsWithConsonantLetter(int wordLenght)
         {
@@ -118,7 +118,7 @@ namespace TextParser.Classes
         public int Count
         { get { return SentencesList.Count(); } }
 
-        //Override the method ToString for easy output
+        //Override the method ToString to easy output
         public override string ToString()
         {
             return String.Join(" ", SentencesList);
