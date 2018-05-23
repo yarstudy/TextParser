@@ -13,7 +13,9 @@ namespace TextParser
         static void Main(string[] args)
         {
             TextHandler text = new TextHandler();
-            text.ParseText(@"E:\Repositories\TextParser\TextParser\TextParser\Files\TestText.txt");
+            //text.ParseText(@"E:\Repositories\TextParser\TextParser\TextParser\Files\TestText.txt");
+            //The line above is a simple file call, the line below is a file call using application properties
+            text.ParseText(Properties.Settings.Default.FilePath);
             Console.WriteLine("Текст:\n");
             Console.WriteLine(text.ToString());
             Console.WriteLine("\n==================================================\n");

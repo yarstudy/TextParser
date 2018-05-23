@@ -57,7 +57,6 @@ namespace TextParser.Classes
         //This method sortes sentences by the number of words (through LINQ).
         public string SortByWordsCount()
         {
-            //return SentencesList.OrderBy(x => x.Count).ToList();
             string result;
             result = String.Join(" ", (from sentence in SentencesList orderby sentence.Count select sentence));
             return result;
