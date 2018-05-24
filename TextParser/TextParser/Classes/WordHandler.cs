@@ -13,25 +13,23 @@ namespace TextParser.Classes
         private static char[] consonantLetters = new char[] { 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Z',
                                                               'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z' };
 
-        //Properties
-        public string Word { get; set; }
-        public List<char> CharactersList { get; set; }
-
-        //Constructor
+        public string Word { get; private set; }
+        public List<char> Characters { get; private set; }
+        
         public WordHandler(string word)
         {
             Word = word;
 
-            CharactersList = new List<char>();
+            Characters = new List<char>();
             foreach (char character in Word)
             {
-                CharactersList.Add(character);
+                Characters.Add(character);
             }
         }
 
         //This method counts the number of words in the sentence and implements the interface ICountElements
         public int Count
-        { get { return CharactersList.Count; } }
+        { get { return Characters.Count; } }
 
         //Override the method ToString to easy output
         public override string ToString()
@@ -42,7 +40,7 @@ namespace TextParser.Classes
         //This method determines whether the first letter of a word is a consonant
         public bool FirstLetterIsConsonant
         {
-            get { return consonantLetters.Contains(CharactersList.First()); }
+            get { return consonantLetters.Contains(Characters.First()); }
         }
     }
 }

@@ -12,13 +12,11 @@ namespace TextParser.Classes
 {
     public class TextHandler : ITextHandler
     {
-        //Property
-        public List<ISentenceHandler> SentencesList { get; set; }
+        public List<ISentenceHandler> Sentences { get; set; }
 
-        //Constructor
         public TextHandler()
         {
-            SentencesList = new List<ISentenceHandler>();
+            Sentences = new List<ISentenceHandler>();
         }
 
         //This method checks the availability of the file and handles raw text
@@ -38,7 +36,7 @@ namespace TextParser.Classes
                 //The line above is commented out so that we can create not only instances of the SentenceHandler class
                 foreach (string sentence in senstences)
                 {
-                    SentencesList.Add(SentenceHandler.ParseSentence(sentence));
+                    Sentences.Add(SentenceHandler.ParseSentence(sentence));
                 }
             }
             catch (Exception ex)
@@ -58,7 +56,7 @@ namespace TextParser.Classes
         public string SortByWordsCount()
         {
             string result;
-            result = String.Join(" ", (from sentence in SentencesList orderby sentence.Count select sentence));
+            result = String.Join(" ", (from sentence in Sentences orderby sentence.Count select sentence));
             return result;
         }
 
@@ -66,33 +64,42 @@ namespace TextParser.Classes
         public string GetInterrogativeSentence(int wordLenght)
         {
             List<string> result = new List<string>();
-            foreach (var sentence in SentencesList.Where(x => x.SentenceIsInterrogative))
+            foreach (var sentence in Sentences.Where(x => x.SentenceIsInterrogative))
             {
-                foreach (var word in sentence.WordsList.Where(x => x.Count == wordLenght))
+                foreach (var word in sentence.Words.Where(x => x.Count == wordLenght))
                 {
                     if (!result.Contains(word.ToString()))
                     { result.Add(word.ToString()); }
                 }
-                //          result = (from word in sentence.WordsList
-                //                    where word.Count == wordLenght
-                //                    select word
-                //                ).Distinct().ToList();
             }
             return String.Join(" ", result);
         }
 
-        //This method removes words of a given length.s
+        //This method removes words of a given length.
+        //public TextHandler RemoveWordsWithConsonantLetter(int wordLenght)
+        //{
+        //    TextHandler result = new TextHandler();
+
+        //    foreach (SentenceHandler sentence in Sentences)
+        //    {
+        //        result.Sentences.Add(new SentenceHandler(sentence.Words.Where(x => !(x.Count == wordLenght && x.FirstLetterIsConsonant)), sentence.Separator));
+        //    }
+        //    return result;
+        //}
+
+        //This method removes words of a given length (through classic methods).
         public TextHandler RemoveWordsWithConsonantLetter(int wordLenght)
         {
             TextHandler result = new TextHandler();
-
-            foreach (SentenceHandler sentence in SentencesList)
+            foreach (SentenceHandler sentence in Sentences)
             {
-                result.SentencesList.Add(new SentenceHandler(sentence.WordsList.Where(x => !(x.Count == wordLenght && x.FirstLetterIsConsonant)), sentence.Separator));
+                result.Sentences.Add(new SentenceHandler
+                   ((from word in sentence.Words
+                     where !(word.Count == wordLenght && word.FirstLetterIsConsonant == true)
+                     select word), sentence.Separator));
             }
             return result;
         }
-
         //This method replaces words of a given length with a substring.
         public TextHandler TextChangeOnSubstring(int sentenceNumber, int wordLenght, string subString)
         {
@@ -100,15 +107,15 @@ namespace TextParser.Classes
 
             TextHandler result = new TextHandler();
 
-            for (int index = 0; index < SentencesList.Count; index++)
+            for (int index = 0; index < Sentences.Count; index++)
             {
                 if (index == sentenceNumber - 1)
                 {
-                    result.SentencesList.Add(new SentenceHandler(SentencesList[index].WordsList.Select(x => x.Count == wordLenght ? tempWord : x), SentencesList[index].Separator));
+                    result.Sentences.Add(new SentenceHandler(Sentences[index].Words.Select(x => x.Count == wordLenght ? tempWord : x), Sentences[index].Separator));
                 }
                 else
                 {
-                    result.SentencesList.Add(new SentenceHandler(SentencesList[index].WordsList, SentencesList[index].Separator));
+                    result.Sentences.Add(new SentenceHandler(Sentences[index].Words, Sentences[index].Separator));
                 }
             }
             return result;
@@ -116,12 +123,12 @@ namespace TextParser.Classes
 
         //This method counts the number of words in the sentence.
         public int Count
-        { get { return SentencesList.Count(); } }
+        { get { return Sentences.Count(); } }
 
         //Override the method ToString to easy output
         public override string ToString()
         {
-            return String.Join(" ", SentencesList);
+            return String.Join(" ", Sentences);
         }
     }
 }

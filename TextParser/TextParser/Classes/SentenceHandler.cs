@@ -11,15 +11,13 @@ namespace TextParser.Classes
 {
     public class SentenceHandler : ISentenceHandler
     {
-        //Properties
         private string Sentence { get; set; }
         public char Separator { get; private set; }
-        public List<IWordHandler> WordsList { get; private set; }
+        public List<IWordHandler> Words { get; private set; }
 
-        //Constructors
         public SentenceHandler()
         {
-            WordsList = new List<IWordHandler>();
+            Words = new List<IWordHandler>();
         }
         public SentenceHandler(string sentence, char separator) : this()
         {
@@ -28,7 +26,7 @@ namespace TextParser.Classes
         }
         public SentenceHandler(IEnumerable<IWordHandler> words, char separator)
         {
-            WordsList = new List<IWordHandler>(words);
+            Words = new List<IWordHandler>(words);
             Separator = separator;
         }
 
@@ -47,19 +45,19 @@ namespace TextParser.Classes
             SentenceHandler result = new SentenceHandler(sentence.Trim(), sentence.LastOrDefault());
             foreach (string word in words)
             {
-                result.WordsList.Add(new WordHandler(word));
+                result.Words.Add(new WordHandler(word));
             }
             return result;
         }
 
         //This method counts the number of words in the sentence and implements the interface ICountElements
         public int Count
-        { get { return WordsList.Count(); } }
+        { get { return Words.Count(); } }
 
         //Override the method ToString for easy output
         public override string ToString()
         {
-            return String.Join(" ", WordsList) + Separator;
+            return String.Join(" ", Words) + Separator;
         }
 
     }
