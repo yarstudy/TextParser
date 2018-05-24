@@ -43,6 +43,7 @@ namespace TextParser.Classes
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("\n==================================================\n");
+                Environment.Exit(1);
             }
         }
 
@@ -56,7 +57,9 @@ namespace TextParser.Classes
         public string SortByWordsCount()
         {
             string result;
-            result = String.Join(" ", (from sentence in Sentences orderby sentence.Count select sentence));
+            result = String.Join(" ", (from sentence in Sentences
+                                       orderby sentence.Count
+                                       select sentence));
             return result;
         }
 
@@ -75,7 +78,7 @@ namespace TextParser.Classes
             return String.Join(" ", result);
         }
 
-        //This method removes words of a given length.
+        //This method removes words of a given length (through classic methods).
         //public TextHandler RemoveWordsWithConsonantLetter(int wordLenght)
         //{
         //    TextHandler result = new TextHandler();
@@ -87,7 +90,7 @@ namespace TextParser.Classes
         //    return result;
         //}
 
-        //This method removes words of a given length (through classic methods).
+        //This method removes words of a given length (through LINQ).
         public TextHandler RemoveWordsWithConsonantLetter(int wordLenght)
         {
             TextHandler result = new TextHandler();
