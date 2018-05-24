@@ -4,18 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextParser.Interfaces;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace TextParser.Classes
+
 {
+    [DataContract]
     public class WordHandler : IWordHandler
     {
+        [DataMember]
         //Static field for determining consonants
         private static char[] consonantLetters = new char[] { 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Z',
                                                               'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z' };
-
+        [DataMember]
         public string Word { get; private set; }
+        [DataMember]
         public List<char> Characters { get; private set; }
-        
+
         public WordHandler(string word)
         {
             Word = word;

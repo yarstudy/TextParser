@@ -6,19 +6,27 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TextParser.Interfaces;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace TextParser.Classes
 {
+    [DataContract]
     public class SentenceHandler : ISentenceHandler
     {
+        [DataMember]
         private string Sentence { get; set; }
+        [DataMember]
         public char Separator { get; private set; }
+        [DataMember]
         public List<IWordHandler> Words { get; private set; }
 
         public SentenceHandler()
         {
             Words = new List<IWordHandler>();
         }
+
         public SentenceHandler(string sentence, char separator) : this()
         {
             Sentence = sentence;

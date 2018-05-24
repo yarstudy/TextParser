@@ -7,14 +7,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TextParser.Classes;
 using TextParser.Interfaces;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace TextParser.Classes
 {
+    [DataContract]
     public class TextHandler : ITextHandler
     {
+        [DataMember]
         public List<ISentenceHandler> Sentences { get; set; }
-
+        
         public TextHandler()
         {
             Sentences = new List<ISentenceHandler>();

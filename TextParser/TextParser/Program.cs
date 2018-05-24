@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextParser.Classes;
+using System.Runtime.Serialization.Json;
 
 namespace TextParser
 {
@@ -13,6 +14,12 @@ namespace TextParser
         static void Main(string[] args)
         {
             TextHandler text = new TextHandler();
+
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TextHandler));
+            using (FileStream fs = new FileStream("text.json", FileMode.OpenOrCreate))
+            {
+                jsonFormatter.WriteObject(fs, text);
+            }
             //text.ParseText(@"E:\Repositories\TextParser\TextParser\TextParser\Files\TestText.txt");
             //The line above is a simple file call, two lines below is a file call using application properties
             //text.ParseText(Properties.Settings.Default.FilePath);
