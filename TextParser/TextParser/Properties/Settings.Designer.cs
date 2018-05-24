@@ -23,15 +23,12 @@ namespace TextParser.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("E:\\Repositories\\TextParser\\TextParser\\TextParser\\Files\\TestText.txt")]
         public string FilePath {
             get {
                 return ((string)(this["FilePath"]));
-            }
-            set {
-                this["FilePath"] = value;
             }
         }
     }

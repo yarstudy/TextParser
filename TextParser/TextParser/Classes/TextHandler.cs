@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TextParser.Classes;
 using TextParser.Interfaces;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace TextParser.Classes
 {
@@ -32,7 +33,7 @@ namespace TextParser.Classes
                 }
 
                 string[] senstences = Regex.Split(tempText.ToString(), @"(?<=[.?!])");
-                //SentenceHandler temtSentences = new SentenceHandler();
+                SentenceHandler temtSentences = new SentenceHandler();
                 //The line above is commented out so that we can create not only instances of the SentenceHandler class
                 foreach (string sentence in senstences)
                 {
